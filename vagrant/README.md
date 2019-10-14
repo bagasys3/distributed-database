@@ -473,3 +473,18 @@ LOAD MYSQL USERS TO RUNTIME;
 SAVE MYSQL USERS TO DISK;
 ```
 
+
+
+## Menyambungkan Aplikasi ke Proxy
+
+Berikut adalah file pengaturan untuk sambungan aplikasi ke database yang dalam kasus ini disambungkan pada proxy
+
+```.env
+DB_CONNECTION=mysql
+DB_HOST=192.168.17.77
+DB_PORT=6033
+DB_DATABASE=lsapp
+DB_USERNAME=lsappuser
+DB_PASSWORD=lsapppassword
+```
+
