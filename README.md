@@ -8,9 +8,9 @@
 
 ## Spesifikasi
 
-- 3 MySQL Server Ubuntu 18.04 RAM 1024MB IP 192.168.17.74 - 192.168.17.76
-- 1 Proxy MySQL Ubuntu 18.04 RAM 1024MB IP 192.168.17.77
-- 1 Apache Web Server Ubuntu 18.04 RAM 1024MB Localhost
+- 3 MySQL Server Ubuntu 16.04 RAM 512MB IP 192.168.17.74 - 192.168.17.76
+- 1 Proxy MySQL Ubuntu 16.04 RAM 512MB IP 192.168.17.77
+- 1 Apache Web Server kubuntu 19.04 Localhost
 
 # Dokumentasi Vagrant Tugas ETS BDT
 
