@@ -1,0 +1,49 @@
+db.createUser(
+      {
+          user: "mongo-admin",
+          pwd: "password",
+          roles: [ "root" ]
+      }
+  )
+
+
+mongo -u mongo-admin -p password --authenticationDatabase admin mydatabase
+
+rs.initiate( { _id: "configReplSet", configsvr: true, members: [ { _id: 0, host: "192.168.33.11:27019" }, { _id: 1, host: "192.168.33.12:27019" }] } )
+
+
+# where to write logging data.
+systemLog:
+destination: file
+logAppend: true
+path: /var/log/mongodb/mongos.log
+
+# network interfaces
+net:
+port: 27017
+bindIp: 192.168.33.13
+
+
+sharding:
+configDB: configReplSet/192.168.33.11:27019,192.168.33.12:27019
+sh.addShard("192.168.33.14:27017")
+sh.addShard("192.168.33.15:27017")
+sh.addShard("192.168.33.16:27017")
+
+mongo 192.168.33.13:27017 -u mongo-admin -p --authenticationDatabase admin
+
+1.County
+2.Category
+3.Taxonomic Group
+4.Taxonomic Subgroup
+5.Scientific Name
+6.Common Name
+7.Year Last Documented
+8.NY Listing Status
+9.Federal Listing Status
+10.State Conservation Rank
+11.Global Conservation Rank
+12.Distribution Status
+
+
+5dd151c3caa9b21a8530e5fd
