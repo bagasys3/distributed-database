@@ -30,7 +30,15 @@ Sistem ini diimplementasikan dengan:
 - MongoDB
 
 ## Implementasi
-
+### Daftar file
+- [Dataset](/biodiversity.csv)
+- [mongo-config-1.conf](/configs/mongo-config-1.conf)
+- [mongo-config-2.conf](/configs/mongo-config-2.conf)
+- [mongo-query-router.conf](/configs/mongo-query-router.conf)
+- [mongo-shard-1.conf](/configs/mongo-shard-1.conf)
+- [mongo-shard-2.conf](/configs/mongo-shard-2.conf)
+- [mongo-shard-3.conf](/configs/mongo-shard-3.conf)
+- [API](/restAPI)
 ###  script Vagrantfile
 ```
 $ vagrant init
