@@ -485,3 +485,9 @@ $ mongoimport -h 192.168.33.13:27017 -u mongo-admin -d populationData -c populat
     if __name__ == "__main__":
     app.run()
     ```
+- ![](/mongo-cluster/images/get.png)
+- ![](/mongo-cluster/images/put.png)
+- ![](/mongo-cluster/images/delete.png)
+- ![](/mongo-cluster/images/post.png)
+- ![](/mongo-cluster/images/distinct.png)
+- ![](/mongo-cluster/images/country_category.png)

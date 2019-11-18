@@ -47,3 +47,37 @@ mongo 192.168.33.13:27017 -u mongo-admin -p --authenticationDatabase admin
 
 
 5dd151c3caa9b21a8530e5fd
+
+{
+    "country": "tes4",
+    "category": "tes4",
+    "taxonomic_group": "tes4",
+    "taxonomic_subgroup": "tes4",
+    "scientific_name": "tes4",
+    "common_name": "tes4",
+    "year_last_documented": "tes4",
+    "ny_listing_status": "tes4",
+    "federal_listing_status": "tes4",
+    "state_conservation_rank": "tes4",
+    "global_conservation_rank": "tes4",
+    "distribution_status": "tes4"
+}
+
+"Biodiversity added successfully! with id = 5dd2aafbddcf7df9e70bcff5"
+
+{
+    "_id": "5dd2aca0ddcf7df9e70bcff6",
+    "country": "tes4",
+    "category": "tes4",
+    "taxonomic_group": "tes4",
+    "taxonomic_subgroup": "tes4",
+    "scientific_name": "tes4",
+    "common_name": "tes4",
+    "year_last_documented": "tes4",
+    "ny_listing_status": "tes4",
+    "federal_listing_status": "tes4",
+    "state_conservation_rank": "tes4",
+    "global_conservation_rank": "tes4",
+    "distribution_status": "tes4"
+}
+
