@@ -304,11 +304,6 @@ mongo> db.createUser({user: "username", pwd: "password", roles: [ "root"] } )
     sharding:
       clusterRole: "shardsvr"
     ```
-```
-    + File [**mongo-shard-1.conf**](config/mongo-shard-1.conf)
-    + File [**mongo-shard-2.conf**](config/mongo-shard-2.conf)
-    + File [**mongo-shard-3.conf**](config/mongo-shard-3.conf)
-```
 
 2. Menambahkan shard ke dalam mongoDB cluster.
     Di salah satu shard sever, masuk ke dalam query router.
@@ -482,10 +477,3 @@ $ mongoimport -h 192.168.33.13:27017 -u mongo-admin -d populationData -c populat
     if __name__ == "__main__":
     app.run()
     ```
-    ### Operasi CREATE
-
-    ### Operasi UPDATE
-
-    ### Operasi DELETE
-
-    ### Operasi AGREGASI
