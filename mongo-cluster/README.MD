@@ -1,50 +1,33 @@
 # Clustering MongoDB
 
-## Deskripsi Tugas
-
-Berikut adalah hal-hal yang perlu dilakukan:
-
-- Mengimplementasikan clustering pada mongoDB
-- Mengimplementasikan aplikasi Create, Read, Update dan Delete menggunakan menggunakan suatu dataset
-
-Adapun batasan untuk dataset yang dipakai adalah sebaga berikut
-
-- Data berupa CSV atau JSON.
-- Jumlah data minimal 1000 data
-
 ### Dataset
 
-Dataset yang digunakan adalah **Biodiversity by County - Distribution of Animals, Plants and Natural Communities** yang diambil dari situs [Data Gov](https://catalog.data.gov/dataset). Dataset lengkapnya dapat diakses melalui tautan berikut.
+Dataset yang digunakan adalah **Biodiversity by County - Distribution of Animals, Plants and Natural Communities** yang diambil dari situs [Data Gov](https://catalog.data.gov/dataset).
 
 [**Biodiversity by County - Distribution of Animals, Plants and Natural Communities**](https://catalog.data.gov/dataset/biodiversity-by-county-distribution-of-animals-plants-and-natural-communities)
 
-Dataset tersebut mempunyai data berjumlah 20018 dan memiliki 12 atribut.
+Dataset berjumlah 20018 baris dan memiliki 12 kolom.
 
 ### Infrastruktur
 
+
 Cluster terdiri dari :
 
-- 1 Query Router
 - 2 Config Server
+    mongo_config_1 192.168.33.11 Ubuntu-18.04 512 MB
+    mongo_config_2 192.168.33.12 Ubuntu-18.04 512 MB
+- 1 Query Router
+    mongo_query_router 192.168.33.13 Ubuntu-18.04 512 MB
 - 3 Data/Shard Server
+    mongo_shard_1 192.168.33.14 Ubuntu-18.04 512 MB
+    mongo_shard_2 192.168.33.15 Ubuntu-18.04 512 MB
+    mongo_shard_3 192.168.33.16 Ubuntu-18.04 512 MB
 
-| Cluster         | Nama Cluster       | Alamat IP     | Sistem Operasi | Alokasi RAM |
-| --------------- | ------------------ | ------------- | -------------- | ----------- |
-| Config Server 1 | mongo_config_1     | 192.168.33.11 | Ubuntu-18.04   | 512 MB      |
-| Config Server 2 | mongo_config_2     | 192.168.33.12 | Ubuntu-18.04   | 512 MB      |
-| Shard Server 2  | mongo_shard_1      | 192.168.33.13 | Ubuntu-18.04   | 512 MB      |
-| Query Router    | mongo_query_router | 192.168.33.14 | Ubuntu-18.04   | 512 MB      |
-| Shard Server 1  | mongo_shard_2      | 192.168.33.15 | Ubuntu-18.04   | 512 MB      |
-| Shard Server 2  | mongo_shard_3      | 192.168.33.16 | Ubuntu-18.04   | 512 MB      |
-
-## Environment
-
-- Sistem Operasi : Ubuntu 18.04
+Sistem ini diimplementasikan dengan: 
+- Mesin dengan Sistem Operasi Ubuntu 18.04
 - Virtual Machine : Virtualbox
 - Vagrant
 - MongoDB
-
-Pengimplementasian dilakukan sepenuhnya pada sistem operasi **Ubuntu 18.04**. Virtual Machine yang digunakan adalah **virtualbox** versi 6, menggunakan box **_bento/ubuntu-18.04_** dan provision menggunakan **Vagrant** versi 2.2.5. Versi **MongoDB** yang digunakan adalah versi 4.2.
 
 ## Implementasi
 
