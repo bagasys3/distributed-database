@@ -1,16 +1,6 @@
 # Clustering MongoDB
 
-### Dataset
-
-Dataset yang digunakan adalah **Biodiversity by County - Distribution of Animals, Plants and Natural Communities** yang diambil dari situs [Data Gov](https://catalog.data.gov/dataset).
-
-[**Biodiversity by County - Distribution of Animals, Plants and Natural Communities**](https://catalog.data.gov/dataset/biodiversity-by-county-distribution-of-animals-plants-and-natural-communities)
-
-Dataset berjumlah 20018 baris dan memiliki 12 kolom.
-
 ### Infrastruktur
-
-
 Cluster terdiri dari :
 
 - 2 Config Server
@@ -23,6 +13,16 @@ Cluster terdiri dari :
     mongo_shard_2 192.168.33.15 Ubuntu-18.04 512 MB
     mongo_shard_3 192.168.33.16 Ubuntu-18.04 512 MB
 
+### Dataset
+
+Dataset yang digunakan adalah **Biodiversity by County - Distribution of Animals, Plants and Natural Communities** yang diambil dari situs [Data Gov](https://catalog.data.gov/dataset).
+
+[**Biodiversity by County - Distribution of Animals, Plants and Natural Communities**](https://catalog.data.gov/dataset/biodiversity-by-county-distribution-of-animals-plants-and-natural-communities)
+
+Dataset berjumlah 20018 baris dan memiliki 12 kolom.
+
+
+
 Sistem ini diimplementasikan dengan: 
 - Mesin dengan Sistem Operasi Ubuntu 18.04
 - Virtual Machine : Virtualbox
@@ -31,14 +31,10 @@ Sistem ini diimplementasikan dengan:
 
 ## Implementasi
 
-###  Konfigurasi Vagrant
+###  script Vagrantfile
 ```
 $ vagrant init
 ```
-
-Perintah tersebut akan membuatkan file `Vagrantfile` yang nantinya akan diisi dengan konfigurasi cluster. Konfigurasi file Vagrantfile adalah sebagai berikut.
-
-File [**Vagrantfile**](Vagrantfile)
 
 ```ruby
 # -*- mode: ruby -*-
@@ -133,9 +129,8 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-### Script Provision
-
-Konfigurasi vagrant tersebut menggunakan file provision untuk tiap host. File provision yang digunakan untuk tiap host adalah file **`allhosts.sh`**.
+### Script Provision Vagrant
+**`allhosts.sh`**.
 
 File [**allhosts.sh**](provision/allhosts.sh)
 
@@ -167,21 +162,18 @@ sudo apt-get install -y mongodb-org
 sudo service mongod start
 ```
 
-###  Build Vagrant
+###  Build Virtualbox
 ```
 $ vagrant up
 ```
 
 ### Konfigurasi Config Server
-
-Setelah proses build selesai, host sudah bisa digunakan. Masuk ke dalam host masing-masing _**config server**_ dengan menggunakan perintah.
-
 ```
 $ vagrant ssh mongo_config_1
 $ vagrant ssh mongo_config_2
 ```
 
-**Membuat Administrative User**
+**BuatAdministrative User**
 
 pada setiap mongo server
 ```
@@ -191,9 +183,6 @@ mongo> db.createUser({user: "username", pwd: "password", roles: [ "root"] } )
 ```
 
 **Konfigurasi Config Server**
-
-- [**mongo-config-1.conf**](config/mongo-config-1.conf)
-- [**mongo-config-2.conf**](config/mongo-config-2.conf)
 ```conf
 .....
 net:
@@ -241,9 +230,6 @@ $ vagrant ssh mongo-query-router
 ```
 
 Buat file konfigurasi.
-
-- File [**mongo-query-router.conf**](config/mongo-query-router.conf)
-
 ```conf
 # where to write logging data.
 systemLog:
@@ -263,10 +249,8 @@ sharding:
 **Service Query Router**
 
 membuat service untuk mongos. Buatlah file service `mongos.service`.
-
-- File [**mongos.service**](config/mongos.service)
-
-```service
+```
+service
 [Unit]
 Description=Mongo Cluster Router
 After=network.target
@@ -294,7 +278,6 @@ WantedBy=multi-user.target
 ```
 
 ###  Konfigurasi Shard Server
-
 masuk ke masing-masing node
 ```
 $ vagrant ssh mongo_shard_1
@@ -313,7 +296,8 @@ mongo> db.createUser({user: "username", pwd: "password", roles: [ "root"] } )
 1. Mengubah file konfigurasi shard server
     Buat file konfigurasi untuk masing-masing shard server. Yang perlu diperhatikan pada masing-masing file konfigurasi adalah:
 
-    ```conf
+    ```
+    conf
     bindIp: <IP masing-masing server>
     ....
     ....
@@ -354,19 +338,15 @@ mongo> db.createUser({user: "username", pwd: "password", roles: [ "root"] } )
 
 ## Import Dataset
 
-Untuk melakukan import dataset menggunakan file CSV, bisa menggunakan perintah yang sudah disediakan oleh mongoDB.
-
 ```
 $ mongoimport -h [host:port] -u [username] -d [database_name] -c [collection_name] --type CSV --file [path/to/file.csv] --headerline --authenticationDatabase admin
 ```
 
-Masuk pada server query router untuk menjalankan perintah tersebut.
+Perintah tersebut dijalankan pada query router
 
 ```
-$ mongoimport -h 192.168.33.16:27017 -u mongo-admin -d populationData -c populationCollection --type CSV --file /vagrant/dataset/data_real.csv --headerline --authenticationDatabase admin
+$ mongoimport -h 192.168.33.13:27017 -u mongo-admin -d populationData -c populationCollection --type CSV --file /vagrant/dataset/data_real.csv --headerline --authenticationDatabase admin
 ```
-
-Data akan diimport pada database yang bersangkutan.
 
 ## API CRUD
     ```
@@ -509,7 +489,3 @@ Data akan diimport pada database yang bersangkutan.
     ### Operasi DELETE
 
     ### Operasi AGREGASI
-
-    ![](https://upload.wikimedia.org/wikipedia/commons/3/3c/Flask_logo.svg)
-
-    ![](https://upload.wikimedia.org/wikipedia/commons/f/f8/Python_logo_and_wordmark.svg)
