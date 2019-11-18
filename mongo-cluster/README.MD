@@ -31,14 +31,14 @@ Sistem ini diimplementasikan dengan:
 
 ## Implementasi
 ### Daftar file
-- [Dataset](/biodiversity.csv)
-- [mongo-config-1.conf](/configs/mongo-config-1.conf)
-- [mongo-config-2.conf](/configs/mongo-config-2.conf)
-- [mongo-query-router.conf](/configs/mongo-query-router.conf)
-- [mongo-shard-1.conf](/configs/mongo-shard-1.conf)
-- [mongo-shard-2.conf](/configs/mongo-shard-2.conf)
-- [mongo-shard-3.conf](/configs/mongo-shard-3.conf)
-- [API](/restAPI)
+- [Dataset](/mongo-cluster/biodiversity.csv)
+- [mongo-config-1.conf](/mongo-cluster/configs/mongo-config-1.conf)
+- [mongo-config-2.conf](/mongo-cluster/configs/mongo-config-2.conf)
+- [mongo-query-router.conf](/mongo-cluster/configs/mongo-query-router.conf)
+- [mongo-shard-1.conf](/mongo-cluster/configs/mongo-shard-1.conf)
+- [mongo-shard-2.conf](/mongo-cluster/configs/mongo-shard-2.conf)
+- [mongo-shard-3.conf](/mongo-cluster/configs/mongo-shard-3.conf)
+- [API](/mongo-cluster/restAPI)
 ###  script Vagrantfile
 ```
 $ vagrant init
