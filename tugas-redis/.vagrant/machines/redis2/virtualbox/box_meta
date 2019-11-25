@@ -1,1 +1,1 @@
-{"name":"bento/ubuntu-18.04","version":"201910.20.0","provider":"virtualbox","directory":"/home/siung2/.vagrant.d/boxes/bento-VAGRANTSLASH-ubuntu-18.04/201910.20.0/virtualbox"}
+{"name":"bento/ubuntu-18.04","version":"201910.20.0","provider":"virtualbox","directory":"boxes/bento-VAGRANTSLASH-ubuntu-18.04/201910.20.0/virtualbox"}
