@@ -9,8 +9,8 @@ Bagas Yanuar S.
   - [7. Memastikan Clustering Berjalan](#7-memastikan-clustering-berjalan)
   - [8. Pengujian Fail Over](#8-pengujian-fail-over)
   - [9. Instalasi Wordpress](#9-instalasi-wordpress)
-  - [11. Instalasi Redis Object Cache pada wordpress1 <a name="rediscache"></a>](#11-instalasi-redis-object-cache-pada-wordpress1-a-name%22rediscache%22a)
-  - [10. Pengujian dengan JMeter](#10-pengujian-dengan-jmeter)
+  - [10. Instalasi Redis Object Cache pada wordpress1 <a name="rediscache"></a>](#10-instalasi-redis-object-cache-pada-wordpress1-a-name%22rediscache%22a)
+  - [11. Pengujian dengan JMeter](#11-pengujian-dengan-jmeter)
 ## 1.  Diagram Arsitektur Sistem
 ![alt text](/images/arsitektur.jpg "Arsitektur Sistem")
 
@@ -302,7 +302,7 @@ Implementasi
     Berikut adalah gambar website wordpress
     ![Website](/images/website.png "website")
 
-## 11. Instalasi Redis Object Cache pada wordpress1 <a name="rediscache"></a>
+## 10. Instalasi Redis Object Cache pada wordpress1 <a name="rediscache"></a>
     i. Login di `/wp-admin`, di bagian `Plugins`, cari dan install `Redis Cache Object`.
     ii. Pada `/var/www/html/wp-config.ph` di server wordpress1, tambah konfigurasi berikut.
     ```
@@ -313,7 +313,7 @@ Implementasi
     iii. Aktifkan Plugin Redis Cache. Pada bagian `Diagnostic` akan terlihat seperti berikut
     ![diagnostic](/images/diagnostic.png "diagnostic")
     
-## 10. Pengujian dengan JMeter
+## 11. Pengujian dengan JMeter
     
     Install `JDK` dan `JRE`, lalu install `JMeter`.
     Berikut adalah alamat yang berisi petunjuk instalasi `JDK`, `JRE`, `JMeter`
