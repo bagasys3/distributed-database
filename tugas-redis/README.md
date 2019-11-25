@@ -1,7 +1,17 @@
 # Implementasi Redis Cluster pada Wordpress
 Bagas Yanuar S.
-
-## Diagram Arsitektur Sistem
+- [Implementasi Redis Cluster pada Wordpress](#implementasi-redis-cluster-pada-wordpress)
+  - [1. Diagram Arsitektur Sistem](#1-diagram-arsitektur-sistem)
+  - [2. Script provision](#2-script-provision)
+  - [4. Services](#4-services)
+  - [5. Script Bash untuk Aktivasi Service](#5-script-bash-untuk-aktivasi-service)
+  - [6. Menghidupkan VM](#6-menghidupkan-vm)
+  - [7. Memastikan Clustering Berjalan](#7-memastikan-clustering-berjalan)
+  - [8. Pengujian Fail Over](#8-pengujian-fail-over)
+  - [9. Instalasi Wordpress](#9-instalasi-wordpress)
+  - [11. Instalasi Redis Object Cache pada wordpress1 <a name="rediscache"></a>](#11-instalasi-redis-object-cache-pada-wordpress1-a-name%22rediscache%22a)
+  - [10. Pengujian dengan JMeter](#10-pengujian-dengan-jmeter)
+## 1.  Diagram Arsitektur Sistem
 ![alt text](/images/arsitektur.jpg "Arsitektur Sistem")
 
 |   Server    |      OS      |  RAM   |      IP       |
@@ -12,20 +22,21 @@ Bagas Yanuar S.
 |   redis 2   | Ubuntu 18.04 | 512 MB | 192.168.17.77 |
 |   redis 3   | Ubuntu 18.04 | 512 MB | 192.168.17/78 |
 
-## Implementasi
-1. Membuat `Vagrantfile`
-    ```
+Implementasi
+ Membuat `Vagrantfile`
+```
     $ vagrant init
-    ```
+```
     Dengan perintah tersebut, dibuatlah file `Vagrantfile`. Yang berisi tentang konfigurasi VM.
-2. Script provision
-   ```
+
+## 2. Script provision
+    ```
     sudo cp /vagrant/sources/hosts /etc/hosts
     sudo cp '/vagrant/sources/sources.list' '/etc/apt/'
 
     sudo apt update -y
     ```
-3. File Konfigurasi
+1. File Konfigurasi
    `redis1.conf`
    ```
     bind 192.168.17.76
@@ -76,10 +87,10 @@ Bagas Yanuar S.
     sentinel parallel-syncs redis-cluster 1
     sentinel failover-timeout redis-cluster 10000
    ```
-4. Services
+## 4. Services
    
    `redis.service`
-   ```
+    ```
    [Unit]
     Description=Redis In-Memory Data Store
     After=network.target
@@ -93,10 +104,10 @@ Bagas Yanuar S.
 
     [Install]
     WantedBy=multi-user.target
-   ```
+    ```
    
    `redisentinel.service`
-   ```
+    ```
     [Unit]
     Description=Redis Sentinel
     After=network.target
@@ -110,12 +121,9 @@ Bagas Yanuar S.
 
     [Install]
     WantedBy=multi-user.target
-   ```
-5. Build Vagrant VM
-   ```bash
-   $ vagrant up
-   ```
-6. Script Bash untuk Aktivasi Service
+    ```
+
+## 5. Script Bash untuk Aktivasi Service
    
    `redis1.sh`
     ```
@@ -261,7 +269,7 @@ Bagas Yanuar S.
     sudo chmod -R 755 /var/www/html/
     sudo systemctl restart apache2
     ```
-7. Menghidupkan VM
+## 6. Menghidupkan VM
    ```
     $ vagrant up
    ```
@@ -269,7 +277,7 @@ Bagas Yanuar S.
    
    Untuk memastikan service-service yang bersangkutan telah berjalan dapat dilakukan perintah `sudo systemctl status redis`, `sudo systemctl status redisentinel` 
 
-8. Memastikan Clustering Berjalan
+## 7. Memastikan Clustering Berjalan
    akses cli redis dengan perintah
    `redis-cli -h 192.168.17.76`, `redis-cli -h 192.168.17.77`, `redis-cli -h 192.168.17.78`
 
@@ -282,19 +290,19 @@ Bagas Yanuar S.
     ![Info Replication 3](/images/inforeplication4.png "inforeplication")
 
 
-9. Pengujian Fail Over
+## 8.  Pengujian Fail Over
     Pengujian Fail Over dilakukan dengan cara menghentikan service server master, dan melihat apakah cluster akan tetap berjalan dengan memilih master yang baru atau tidak. Berikut adalah hasilnya.
 
     Pada awalnya `192.168.17.76` memiliki role sebagai master. Kini, `192.168.17.78` memiliki role sebagai master.
     ![Hasil Pengujian Fail Over](/images/hasilfailover.png "hasilfailover")
 
-10. Instalasi Wordpress 
+## 9. Instalasi Wordpress
     instalasi dapat dilakukan dengan mengunjungi alamat pada `192.168.17.74/index.php`, `192.168.17.75/index.php` browser, dan mengikuti tahapan dan petunjuk yang ada.
 
     Berikut adalah gambar website wordpress
     ![Website](/images/website.png "website")
 
-11. Instalasi Redis Object Cache pada wordpress1
+## 11. Instalasi Redis Object Cache pada wordpress1 <a name="rediscache"></a>
     i. Login di `/wp-admin`, di bagian `Plugins`, cari dan install `Redis Cache Object`.
     ii. Pada `/var/www/html/wp-config.ph` di server wordpress1, tambah konfigurasi berikut.
     ```
@@ -305,7 +313,7 @@ Bagas Yanuar S.
     iii. Aktifkan Plugin Redis Cache. Pada bagian `Diagnostic` akan terlihat seperti berikut
     ![diagnostic](/images/diagnostic.png "diagnostic")
     
-12. Pengujian dengan JMeter
+## 10. Pengujian dengan JMeter
     
     Install `JDK` dan `JRE`, lalu install `JMeter`.
     Berikut adalah alamat yang berisi petunjuk instalasi `JDK`, `JRE`, `JMeter`
