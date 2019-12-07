@@ -1,0 +1,41 @@
+global:
+  scrape_interval:     15s  # By default, scrape targets every 15 seconds.
+  evaluation_interval: 15s  # By default, scrape targets every 15 seconds.
+  # scrape_timeout is set to the global default value (10s).
+  external_labels:
+    cluster: 'test-cluster'
+    monitor: "prometheus"
+
+scrape_configs:
+  - job_name: 'overwritten-nodes'
+    honor_labels: true  # Do not overwrite job & instance labels.
+    static_configs:
+    - targets:
+      - '192.168.17.74:9100'
+      - '192.168.17.75:9100'
+      - '192.168.17.76:9100'
+      - '192.168.17.77:9100'
+      - '192.168.17.78:9100'
+      - '192.168.17.79:9100'
+
+  - job_name: 'tidb'
+    honor_labels: true  # Do not overwrite job & instance labels.
+    static_configs:
+    - targets:
+      - '192.168.17.74:10080'
+
+  - job_name: 'pd'
+    honor_labels: true  # Do not overwrite job & instance labels.
+    static_configs:
+    - targets:
+      - '192.168.17.74:2379'
+      - '192.168.17.75:2379'
+      - '192.168.17.76:2379'
+
+  - job_name: 'tikv'
+    honor_labels: true  # Do not overwrite job & instance labels.
+    static_configs:
+    - targets:
+      - '192.168.17.77:20180'
+      - '192.168.17.78:20180'
+      - '192.168.17.79:20180'
