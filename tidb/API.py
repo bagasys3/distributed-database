@@ -29,10 +29,10 @@ def delete_biodiversity(id):
     resp.status_code = 200
     return resp
 
-@app.route('/biodiversity', methods=['GET'])
-def get_news():
+@app.route('/biodiversity/<id>', methods=['GET'])
+def get_biodiversity(id):
     cur = db.cursor()
-    cur.execute("SELECT * FROM biodiversity ORDER BY id DESC LIMIT 10")
+    cur.execute("SELECT * FROM biodiversity WHERE id = {}". format(id))
 
     data = []
     for (row) in cur:
