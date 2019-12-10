@@ -563,7 +563,7 @@ cd tidb-bench/sysbench
    curl http://192.168.17.74:2379/pd/api/v1/members
    ```
 
-   ![](/home/siung2/Documents/GitHub/distributed-database/tidb/gambar/failover1.png)
+   ![](/gambar/failover1.png)
 
 2. Matikan service pd1
 
@@ -581,4 +581,4 @@ cd tidb-bench/sysbench
 
 3. Cek kembali apakah posisi leader digantikan
 
-   ![](/home/siung2/Documents/GitHub/distributed-database/tidb/gambar/failover2.png)
+   ![](gambar/failover2.png)
